@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script defer src="alpine.min.js"></script>
+
+	<title>Tab/View Switcher</title>
+</head>
+<body>
+
+<h1>Tab or view demo</h1>
+
+<div x-data="{ viewSwitcher: 1 /* Use 0 to set no default */ }">
+
+	<button x-on:click="viewSwitcher = 1" type="button">View 1</button>
+	<button x-on:click="viewSwitcher = 2" type="button">View 2</button>
+	<button x-on:click="viewSwitcher = 3" type="button">View 3</button>
+
+	<div x-show="1 === viewSwitcher">View 1</div>
+	<div x-show="2 === viewSwitcher">View 2</div>
+	<div x-show="3 === viewSwitcher">View 3</div>
+
+</div>
+
+</body>
+</html>

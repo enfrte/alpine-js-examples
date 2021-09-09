@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script defer src="alpine.min.js"></script>
+
+	<title>Document</title>
+</head>
+<body x-data="{ body: {message: 'I ❤️ Alpine'} }">
+
+<h1 x-text="message"></h1>
+
+<div 
+	x-data="alpineInstance()"
+	x-init="fetch('app-data.json')
+		.then(response => response.json())
+		.then(fetchData => data = fetchData)">
+
+	<template x-for="d in data" :key="d._id">
+		<div>
+			<h1 x-text="message"></h1>
+			<p>
+				<a x-text="d.title" @click="$el.href = d.slug + '.html'"></a>
+			</p>
+		</div>
+	</template>
+
+</div>
+
+<script>
+	function alpineInstance() {
+		return {
+			title: 'My Title',
+			intro: 'Hell0 :)',
+			message: 'Instance message',
+			data: [],
+		}
+	}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Supabase example</title>
+
+	<script src="https://unpkg.com/@supabase/supabase-js"></script>
+
+</head>
+<body>
+
+<div x-data="{ messages: [] }" x-init="getMessages()">
+
+	<h1>Messages</h1>
+	<template x-for="m in messages" :key="m.id">
+		<p>
+			<a x-text="m.message"></a>
+		</p>
+	</template>
+
+</div>
+
+<script>
+
+fetch('https://evuzfuhwssqwcfyrsvks.supabase.co/rest/v1/messages?select=*', 
+			{
+				headers: {
+					//'Content-Type': 'application/json',
+					"apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzMjU3Mjc2MCwiZXhwIjoxOTQ4MTQ4NzYwfQ.DG4cCIA9N3zbZRAaLtKkTg5m_mGAcMb8Rp-jfkTIRIM",
+					//'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzMjU3Mjc2MCwiZXhwIjoxOTQ4MTQ4NzYwfQ.DG4cCIA9N3zbZRAaLtKkTg5m_mGAcMb8Rp-jfkTIRIM'
+				}
+			}
+		)
+		.then(response => response.json())
+		.then(fetchData => {
+			console.log(fetchData);
+		});
+
+	function getMessages() {
+		fetch('https://evuzfuhwssqwcfyrsvks.supabase.co/rest/v1/messages?select=*', 
+			{
+				headers: {
+					//'Content-Type': 'application/json',
+					'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzMjU3Mjc2MCwiZXhwIjoxOTQ4MTQ4NzYwfQ.DG4cCIA9N3zbZRAaLtKkTg5m_mGAcMb8Rp-jfkTIRIM',
+					//'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzMjU3Mjc2MCwiZXhwIjoxOTQ4MTQ4NzYwfQ.DG4cCIA9N3zbZRAaLtKkTg5m_mGAcMb8Rp-jfkTIRIM'
+				}
+			}
+		)
+		.then(response => response.json())
+		.then(fetchData => {
+			console.log(fetchData);
+			messages = fetchData;
+		});
+
+	}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script defer src="alpine.min.js"></script>
+
+	<title>Template</title>
+</head>
+<body>
+
+<div x-data="{ formSubmit: false }">
+	<form action="get-post.php" method="post">
+
+		<p>Agree to the terms</p>
+		<div x-data="{ answer: '' }">
+			<p>
+				<input type="radio" name="yesNoChoice" value="yes" x-on:click="answer = ''">Yes<br>
+				<input type="radio" name="yesNoChoice" value="no" x-on:click="answer = 'You have to say yes.'">No
+			</p>
+			<p x-text="answer"></p>
+		</div>
+
+		<hr>
+
+		<p>Agree to the another term</p>
+		<div x-data="{ answer: '' }">
+			<p>
+				<input type="radio" name="yesNoChoice2" value="yes" x-on:click="answer = ''">Yes<br>
+				<input type="radio" name="yesNoChoice2" value="no" x-on:click="answer = 'You have to say yes.'">No
+			</p>
+			<p x-text="answer"></p>
+		</div>
+
+		<button x-bind:disabled="formSubmit"></button>
+
+	</form>
+</div>
+
+
+</body>
+</html>

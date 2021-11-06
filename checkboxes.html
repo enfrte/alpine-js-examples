@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script defer src="alpine.min.js"></script>
+
+	<title>Checkboxes</title>
+</head>
+<body>
+
+<form action="get-post.php" method="post">
+
+	<div x-data="{ 
+		foo: [], 
+		multiSelect: function() {
+			let checkboxes = document.getElementsByName('cb[]');
+			let checkboxes_array = Array.from(checkboxes);
+			//debugger;
+			let totalChecked = checkboxes_array.reduce(function (accumulator, checkbox) {
+				return ((checkbox.checked) ? ++accumulator : accumulator);
+			}, 0);
+			if (totalChecked < checkboxes.length) {
+				console.log('totalChecked', totalChecked);
+				console.log('checkboxes.length', checkboxes.length);
+				for (let checkbox of checkboxes) {
+					checkbox.checked = true;
+				}
+			} 
+			else {
+				this.foo = [];
+				// if user manually selects all checkboxes then selects 'Select all', also uncheck the multiselect checkbox.
+				document.getElementById('multiSelect').checked = false; 
+			}
+		},
+	}">
+		<input id="multiSelect" x-on:click="multiSelect()" type="checkbox"> Select all <br>
+	
+		<input x-model="foo" type="checkbox" value="one" name="cb[]"> 1<br>
+		<input x-model="foo" type="checkbox" value="two" name="cb[]"> 2<br>
+		<input x-model="foo" type="checkbox" value="three" name="cb[]"> 3<br>
+	</div>
+	<button>Submit</button>
+</form>
+
+</body>
+</html>

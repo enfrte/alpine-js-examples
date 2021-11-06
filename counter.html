@@ -10,8 +10,10 @@
 </head>
 <body>
 
+<p><a href="index.html">Back to index</a></p>
+
 <div x-data="{ count: 0 }">
-    <button x-on:click="count++">Increment</button>
+    <button x-on:click="++count">Increment</button>
 
     <span x-text="count"></span>
 </div>

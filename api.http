@@ -1,3 +1,3 @@
 https://evuzfuhwssqwcfyrsvks.supabase.co/rest/v1/messages?select=*
-apikey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzMjU3Mjc2MCwiZXhwIjoxOTQ4MTQ4NzYwfQ.DG4cCIA9N3zbZRAaLtKkTg5m_mGAcMb8Rp-jfkTIRIM" 
-Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzMjU3Mjc2MCwiZXhwIjoxOTQ4MTQ4NzYwfQ.DG4cCIA9N3zbZRAaLtKkTg5m_mGAcMb8Rp-jfkTIRIM"
+apikey: "" 
+Authorization: "Bearer "

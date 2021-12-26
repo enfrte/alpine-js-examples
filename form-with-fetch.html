@@ -48,14 +48,13 @@ function alpineInstance() {
 		search: '',
 		fetch_result: false,
 		fetchData: function () { 
-			// Update the fetch path to match your server config
-			console.log(this.search);
+			//console.log(this.search);
 			return fetch('https://io.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch='+ this.search +'&srwhat=text&origin=*')
 				.then(response => response.json())
 				.then(data => {
 					console.log(data);
 					const result = data;
-					if (data.hasOwnProperty('error')) { // Handle wikiprdia returned error state
+					if (data.hasOwnProperty('error')) { // Handle wikipedia returned error state
 						return (this.fetch_result = false);
 					}
 					return (this.fetch_result = data);

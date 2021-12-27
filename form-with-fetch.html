@@ -6,6 +6,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script defer src="alpine.min.js"></script>
 
+	<style>
+		.searchmatch {
+			font-weight: bold;
+		}
+	</style>
 	<title>Form with fetch</title>
 </head>
 <body>
@@ -20,7 +25,7 @@
 		<input x-model="search" type="text">
 	</form>
 
-	<template x-if="fetch_result">
+	<template x-if="!error">
 		<div>
 			<p>
 				<span>Total hits:</span>
@@ -39,6 +44,13 @@
 			</div>
 		</div>
 	</template>
+	<template x-if="error">
+		<p>
+			<span>Error:</span>
+			<span x-text="error"></span>
+		</p>
+	</template>
+
 
 </div>
 
@@ -46,20 +58,29 @@
 function alpineInstance() {		
 	return {
 		search: '',
-		fetch_result: false,
+		fetch_result: { query: { searchinfo: { totalhits: 0 } } },
 		fetchData: function () { 
 			//console.log(this.search);
 			return fetch('https://io.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch='+ this.search +'&srwhat=text&origin=*')
 				.then(response => response.json())
 				.then(data => {
 					console.log(data);
-					const result = data;
+					this.error = false;
 					if (data.hasOwnProperty('error')) { // Handle wikipedia returned error state
-						return (this.fetch_result = false);
+						this.fetch_result.query.searchinfo.totalhits = 0;
+						return (this.error = this.errors.WIKIP_ERR);
 					}
 					return (this.fetch_result = data);
-				}
-			);
+				})
+				.catch(error => {
+					this.error = this.errors.FETCH_ERR;
+					this.fetch_result.query.searchinfo.totalhits = 0;
+				});
+		},
+		error: false,
+		errors: {
+			WIKIP_ERR: "There was an error retrieving the results from WikiPedia.",
+			FETCH_ERR: "There was an error retrieving the connecting to the WikiPedia."
 		}
 	}
 }
